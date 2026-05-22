@@ -38,16 +38,16 @@ const Terminal = () => {
 
   return (
     <div className="h-full bg-black text-[#c0c0c0] font-mono text-xs flex flex-col">
-      <pre className="flex-1 overflow-auto p-2 whitespace-pre-wrap m-0">
+      <pre className="flex-1 overflow-auto p-2 whitespace-pre-wrap m-0 pb-0">
         {history.map((entry, i) => (
           <span key={i}>
             {entry.cmd && <><span className="text-gray-400">C:\Users\{TEXT.name.split(' ')[0]}&gt;</span>{entry.cmd}{'\n'}</>}
-            {entry.output}{'\n\n'}
+            {entry.output}{'\n'}
           </span>
         ))}
         <span ref={endRef} />
       </pre>
-      <form onSubmit={handleSubmit} className="flex items-center gap-1 px-2 pb-2 bg-black">
+      <form onSubmit={handleSubmit} className="flex items-center gap-1 px-2 py-1 bg-black shrink-0">
         <span className="text-gray-400 shrink-0">C:\Users\{TEXT.name.split(' ')[0]}&gt;</span>
         <input value={input} onChange={(e) => setInput(e.target.value)} className="flex-1 bg-transparent outline-none text-[#c0c0c0] border-none font-mono text-xs" autoFocus />
       </form>

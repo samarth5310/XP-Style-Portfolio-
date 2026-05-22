@@ -14,6 +14,7 @@ import AboutMe from '@/components/apps/AboutMe';
 import MyResume from '@/components/apps/MyResume';
 import ContactMe from '@/components/apps/ContactMe';
 import Terminal from '@/components/apps/Terminal';
+import IframeWithLoader from '@/components/IframeLoader';
 
 interface DesktopScreenProps {
   onRestart: () => void;
@@ -29,6 +30,15 @@ const DesktopScreen: React.FC<DesktopScreenProps> = ({ onRestart, onLogOut, isCr
   const [nextZIndex, setNextZIndex] = useState(100);
   const [contextMenu, setContextMenu] = useState<{ x: number; y: number } | null>(null);
   const [showWelcome, setShowWelcome] = useState(false);
+  const [showProperties, setShowProperties] = useState(false);
+  const [wallpaper, setWallpaper] = useState(ASSETS.wallpaper);
+
+  const WALLPAPERS = [
+    { name: 'Bliss', url: ASSETS.wallpaper },
+    { name: 'Dark', url: 'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=1920&q=80' },
+    { name: 'Space', url: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=80' },
+    { name: 'Mountains', url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80' },
+  ];
 
   useEffect(() => {
     const t1 = setTimeout(() => setShowWelcome(true), 1500);
@@ -69,19 +79,19 @@ const DesktopScreen: React.FC<DesktopScreenProps> = ({ onRestart, onLogOut, isCr
       case 'terminal': openWindow('terminal', 'Command Prompt', XP_ICONS.terminal, 'system', <Terminal />, true, { initialWidth: 650, initialHeight: 420 }); break;
       case 'paint':
         openWindow('paint', 'Paint', 'https://mitchivin.com/assets/gui/start-menu/paint.webp', 'browser',
-          <iframe src="https://jspaint.app" className="w-full h-full border-none" title="Paint" />, true
+          <IframeWithLoader src="https://jspaint.app" title="Paint" />, true
         ); break;
       case 'music':
         openWindow('music', 'Music Player', 'https://mitchivin.com/assets/gui/start-menu/music.webp', 'browser',
-          <iframe src="https://aidn.jp/mikutap/" className="w-full h-full border-none" title="Music Player" allow="autoplay" />, true, { initialWidth: 700, initialHeight: 500 }
+          <IframeWithLoader src="https://aidn.jp/mikutap/" title="Music Player" allow="autoplay" />, true, { initialWidth: 700, initialHeight: 500 }
         ); break;
       case 'imageviewer':
         openWindow('imageviewer', 'Image Viewer', 'https://mitchivin.com/assets/gui/start-menu/photos.webp', 'browser',
-          <iframe src="https://unsplash.com/explore" className="w-full h-full border-none" title="Image Viewer" />, true
+          <IframeWithLoader src="https://unsplash.com/explore" title="Image Viewer" />, true
         ); break;
       case 'game':
         openWindow('game', 'Smash Karts', 'https://icons.iconarchive.com/icons/papirus-team/papirus-apps/512/supertuxkart-icon.png', 'browser',
-          <iframe src="https://smashkarts.io/" className="w-full h-full border-none" title="Smash Karts" allow="autoplay; fullscreen; gyroscope; accelerometer; gamepad" allowFullScreen />, true
+          <IframeWithLoader src="https://smashkarts.io/" title="Smash Karts" allow="autoplay; fullscreen; gyroscope; accelerometer; gamepad" allowFullScreen />, true
         ); break;
     }
   };
@@ -92,7 +102,7 @@ const DesktopScreen: React.FC<DesktopScreenProps> = ({ onRestart, onLogOut, isCr
         {/* Wallpaper */}
         <div
           className="absolute inset-0 bg-cover bg-center z-0"
-          style={{ backgroundImage: `url(${ASSETS.wallpaper})` }}
+          style={{ backgroundImage: `url(${wallpaper})` }}
         />
 
         {/* Right-click Context Menu */}
@@ -110,7 +120,7 @@ const DesktopScreen: React.FC<DesktopScreenProps> = ({ onRestart, onLogOut, isCr
             <div className="border-t border-gray-200 my-[2px]" />
             <div className="px-4 py-[3px] hover:bg-[#316ac5] hover:text-white cursor-pointer" onClick={() => setContextMenu(null)}>New ▸</div>
             <div className="border-t border-gray-200 my-[2px]" />
-            <div className="px-4 py-[3px] hover:bg-[#316ac5] hover:text-white cursor-pointer" onClick={() => setContextMenu(null)}>Properties</div>
+            <div className="px-4 py-[3px] hover:bg-[#316ac5] hover:text-white cursor-pointer" onClick={() => { setContextMenu(null); setShowProperties(true); }}>Properties</div>
           </div>
         )}
 
@@ -198,6 +208,40 @@ const DesktopScreen: React.FC<DesktopScreenProps> = ({ onRestart, onLogOut, isCr
       <AnimatePresence>
         {showShutdownModal && <ShutdownModal onRestart={onRestart} onLogOff={onLogOut} onCancel={() => setShowShutdownModal(false)} />}
       </AnimatePresence>
+
+      {/* Properties Modal */}
+      {showProperties && (
+        <div className="fixed inset-0 z-[9998] flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/20" onClick={() => setShowProperties(false)} />
+          <div className="relative w-[400px] bg-[#ece9d8] border border-gray-500 shadow-[3px_3px_8px_rgba(0,0,0,0.4)] font-sans select-none z-10">
+            <div className="h-[28px] bg-gradient-to-b from-[#0058ee] via-[#3593ff] to-[#288eff] flex items-center justify-between px-2 rounded-t-[3px]">
+              <span className="text-white text-xs font-bold">Display Properties</span>
+              <button onClick={() => setShowProperties(false)} className="w-[18px] h-[18px] bg-[#e81123] rounded-[2px] flex items-center justify-center border border-white/40 hover:bg-[#f4606c] text-white text-[10px]">✕</button>
+            </div>
+            <div className="p-4">
+              <div className="bg-[#316ac5] rounded p-3 mb-3 flex items-center justify-center h-[120px]">
+                <div className="w-[160px] h-[100px] bg-cover bg-center border-2 border-gray-600 rounded-sm" style={{ backgroundImage: `url(${wallpaper})` }} />
+              </div>
+              <p className="text-xs text-gray-700 mb-2 font-bold">Background:</p>
+              <div className="border border-gray-400 bg-white max-h-[120px] overflow-y-auto">
+                {WALLPAPERS.map((wp) => (
+                  <div
+                    key={wp.name}
+                    onClick={() => setWallpaper(wp.url)}
+                    className={`px-3 py-1 text-xs cursor-pointer ${wallpaper === wp.url ? 'bg-[#316ac5] text-white' : 'hover:bg-blue-100'}`}
+                  >
+                    {wp.name}
+                  </div>
+                ))}
+              </div>
+              <div className="flex justify-end gap-2 mt-4">
+                <button onClick={() => setShowProperties(false)} className="px-4 py-1 bg-[#ece9d8] border border-gray-400 text-xs hover:bg-gray-200 rounded-[2px]">OK</button>
+                <button onClick={() => setShowProperties(false)} className="px-4 py-1 bg-[#ece9d8] border border-gray-400 text-xs hover:bg-gray-200 rounded-[2px]">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
