@@ -14,6 +14,7 @@ import AboutMe from '@/components/apps/AboutMe';
 import MyResume from '@/components/apps/MyResume';
 import ContactMe from '@/components/apps/ContactMe';
 import Terminal from '@/components/apps/Terminal';
+import MediaPlayer from '@/components/apps/MediaPlayer';
 import IframeWithLoader from '@/components/IframeLoader';
 
 interface DesktopScreenProps {
@@ -82,8 +83,8 @@ const DesktopScreen: React.FC<DesktopScreenProps> = ({ onRestart, onLogOut, isCr
           <IframeWithLoader src="https://jspaint.app" title="Paint" />, true
         ); break;
       case 'music':
-        openWindow('music', 'Music Player', 'https://mitchivin.com/assets/gui/start-menu/music.webp', 'browser',
-          <IframeWithLoader src="https://aidn.jp/mikutap/" title="Music Player" allow="autoplay" />, true, { initialWidth: 700, initialHeight: 500 }
+        openWindow('music', 'Media Player', 'https://mitchivin.com/assets/gui/start-menu/music.webp', 'system',
+          <MediaPlayer />, true, { initialWidth: 600, initialHeight: 480 }
         ); break;
       case 'imageviewer':
         openWindow('imageviewer', 'Image Viewer', 'https://mitchivin.com/assets/gui/start-menu/photos.webp', 'browser',
