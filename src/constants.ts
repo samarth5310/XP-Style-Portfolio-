@@ -88,4 +88,13 @@ export const PROJECTS = [
     github: 'https://github.com/samarth5310/Techathon_Live_Dashboard',
     color: 'bg-[#2aa01b]',
   },
+  {
+    id: 5,
+    title: 'XP-Style Portfolio',
+    category: 'Personal Portfolio',
+    description: 'A fully interactive Windows XP-themed portfolio with draggable windows, boot screen, start menu, CRT effect, and embedded apps.',
+    tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'react-rnd'],
+    github: 'https://github.com/samarth5310/XP-Style-Portfolio-',
+    color: 'bg-[#103b9a]',
+  },
 ];
