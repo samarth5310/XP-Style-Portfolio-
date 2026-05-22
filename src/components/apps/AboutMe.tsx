@@ -24,7 +24,7 @@ const SidebarSection = ({ title, children, isOpen = true }: { title: string; chi
 };
 
 const AboutMe = () => {
-  const skills = ['React / Next.js', 'TypeScript', 'Node.js / Express', 'Tailwind CSS', 'MongoDB / PostgreSQL', 'Git & GitHub', 'Python', 'REST APIs'];
+  const skills = ['React / Next.js', 'TypeScript / JavaScript', 'Python / Java', 'Node.js / Flask / FastAPI', 'Tailwind CSS', 'PostgreSQL / MongoDB', 'Supabase / Firebase', 'Git / GitHub Actions', 'Linux / GCP', 'Data Structures & Algorithms'];
   const tools = [
     { name: 'VS Code', icon: XP_ICONS.vscode },
     { name: 'Git', icon: XP_ICONS.git },
@@ -80,13 +80,13 @@ const AboutMe = () => {
             </div>
             <div className="text-sm leading-relaxed text-gray-800 pt-2">
               <p className="mb-4">
-                I&apos;m <strong>{TEXT.name}</strong>, a full-stack developer from {TEXT.location}. I specialize in building modern web applications with React, Next.js, TypeScript, and Node.js.
+                I&apos;m <strong>{TEXT.name}</strong>, a B.E. Computer Science student at Biluru Gurubasava Mahaswamiji Institute of Technology, Mudhol (2023-2027). Based in {TEXT.location}.
               </p>
               <p className="mb-4">
-                I love creating intuitive user experiences and solving complex problems through clean, efficient code. My projects range from food comparison apps to certificate generators and live dashboards.
+                I&apos;m focused on cybersecurity, cloud technologies, and full-stack web development. I build secure, scalable applications using React, TypeScript, Node.js, and cloud platforms like Supabase and Firebase.
               </p>
               <p>
-                Currently pursuing BCA at Rani Channamma University, Bagalkot (2022-2025). Always learning, always building.
+                Certified in AWS Solutions Architecture, Cybersecurity Foundations, and Network Security. Currently seeking internships to gain industry experience.
               </p>
             </div>
           </div>
