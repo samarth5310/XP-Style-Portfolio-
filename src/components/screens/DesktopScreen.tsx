@@ -107,7 +107,7 @@ const DesktopScreen: React.FC<DesktopScreenProps> = ({ onRestart, onLogOut, isCr
         )}
 
         {/* Desktop Icons */}
-        <div className="relative z-10 w-full h-full p-4 flex flex-col items-start content-start flex-wrap gap-4" onContextMenu={(e) => e.preventDefault()}>
+        <div className="relative z-10 w-full h-full p-4 flex flex-row sm:flex-col items-start content-start flex-wrap gap-2 sm:gap-4" onContextMenu={(e) => e.preventDefault()}>
           <DesktopIcon label="About Me" icon={<img src={XP_ICONS.aboutMe} alt="" className="w-12 h-12 object-contain drop-shadow-md pointer-events-none" />} onClick={() => handleStartMenuItemClick('aboutme')} />
           <DesktopIcon label="My Resume" icon={<img src={XP_ICONS.resume} alt="" className="w-12 h-12 object-contain drop-shadow-md pointer-events-none" />} onClick={() => handleStartMenuItemClick('resume')} />
           <DesktopIcon label="My Projects" icon={<img src={XP_ICONS.projects} alt="" className="w-12 h-12 object-contain drop-shadow-md pointer-events-none" />} onClick={() => handleStartMenuItemClick('projects')} />

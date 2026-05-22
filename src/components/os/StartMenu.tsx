@@ -59,7 +59,7 @@ const StartMenu: React.FC<StartMenuProps> = ({ onItemClick, onShutdownClick }) =
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 10 }}
       transition={{ duration: 0.15 }}
-      className="absolute bottom-[30px] left-0 w-[380px] sm:w-[420px] rounded-t-lg shadow-[4px_4px_8px_rgba(0,0,0,0.5)] overflow-visible flex flex-col font-sans select-none z-[60]"
+      className="absolute bottom-[30px] left-0 w-full sm:w-[380px] md:w-[420px] rounded-t-lg shadow-[4px_4px_8px_rgba(0,0,0,0.5)] overflow-visible flex flex-col font-sans select-none z-[60]"
       style={{ background: '#fff', border: '1px solid #316ac5', borderBottom: 'none' }}
     >
       {/* Header */}
@@ -121,7 +121,7 @@ const StartMenu: React.FC<StartMenuProps> = ({ onItemClick, onShutdownClick }) =
         </div>
 
         {/* Right Column */}
-        <div className="w-[180px] bg-[#d3e5fa] border-l border-[#9cbce8] flex flex-col py-2 px-1 text-[#00135c]">
+        <div className="w-[180px] bg-[#d3e5fa] border-l border-[#9cbce8] hidden sm:flex flex-col py-2 px-1 text-[#00135c]">
           <StartMenuRightItem icon={XP_ICONS.github} label="GitHub" isBold onClick={() => window.open(TEXT.github, '_blank')} />
           <StartMenuRightItem icon={XP_ICONS.linkedin} label="LinkedIn" isBold onClick={() => window.open(TEXT.linkedin, '_blank')} />
           <div className="my-1 mx-2 border-b border-[#aebcd8]" />

@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { X, Minus, Square, Copy, ArrowLeft, ArrowRight, Search, ChevronDown } from 'lucide-react';
 import { XP_ICONS } from '@/constants';
 
+import { useIsMobile } from '@/hooks/useIsMobile';
+
 interface WindowProps {
   title: string;
   icon: string;
@@ -27,6 +29,8 @@ const Window: React.FC<WindowProps> = ({
   initialWidth = 800, initialHeight = 600, isMinimized = false,
 }) => {
   const [isMaximized, setIsMaximized] = useState(false);
+  const isMobile = useIsMobile();
+  const effectiveMaximized = isMobile || isMaximized;
   const [pos, setPos] = useState({ x: 80 + Math.random() * 100, y: 40 + Math.random() * 60 });
   const [size, setSize] = useState({ width: typeof initialWidth === 'string' ? parseInt(initialWidth) || 800 : initialWidth, height: typeof initialHeight === 'string' ? parseInt(initialHeight) || 600 : initialHeight });
   const [preMaxState, setPreMaxState] = useState({ pos: { x: 0, y: 0 }, size: { width: 800, height: 600 } });
@@ -34,7 +38,7 @@ const Window: React.FC<WindowProps> = ({
   if (isMinimized) return null;
 
   const toggleMaximize = () => {
-    if (!isMaximized) {
+    if (!effectiveMaximized) {
       setPreMaxState({ pos, size });
       setIsMaximized(true);
     } else {
@@ -66,7 +70,7 @@ const Window: React.FC<WindowProps> = ({
             <Minus color="white" size={12} strokeWidth={4} className="mt-2" />
           </button>
           <button onClick={(e) => { e.stopPropagation(); toggleMaximize(); }} className="w-[21px] h-[21px] bg-[#288eff] rounded-[3px] flex items-center justify-center border border-white/40 hover:bg-[#4a9eff] active:bg-[#196ebf]">
-            {isMaximized ? <Copy color="white" size={10} strokeWidth={3} /> : <Square color="white" size={10} strokeWidth={3} />}
+            {effectiveMaximized ? <Copy color="white" size={10} strokeWidth={3} /> : <Square color="white" size={10} strokeWidth={3} />}
           </button>
           <button onClick={(e) => { e.stopPropagation(); onClose(); }} className="w-[21px] h-[21px] bg-[#e81123] rounded-[3px] flex items-center justify-center border border-white/40 hover:bg-[#f4606c] active:bg-[#bf0e1d]">
             <X color="white" size={14} strokeWidth={3} />
@@ -115,7 +119,7 @@ const Window: React.FC<WindowProps> = ({
     </motion.div>
   );
 
-  if (isMaximized) {
+  if (effectiveMaximized) {
     return (
       <div style={{ position: 'fixed', inset: 0, bottom: 30, zIndex, display: 'flex', flexDirection: 'column' }} className="pointer-events-auto">
         {windowContent}
