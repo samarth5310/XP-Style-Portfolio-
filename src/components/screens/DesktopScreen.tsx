@@ -54,7 +54,7 @@ const DesktopScreen: React.FC<DesktopScreenProps> = ({ onRestart, onLogOut, isCr
 
   const handleStartMenuItemClick = (id: string) => {
     switch (id) {
-      case 'projects': openWindow('projects', 'My Projects', XP_ICONS.projects, 'browser', <MyProjects onOpenProject={handleOpenWebLink} />); break;
+      case 'projects': openWindow('projects', 'My Projects', XP_ICONS.projects, 'browser', <MyProjects />); break;
       case 'aboutme': openWindow('aboutme', 'About Me', XP_ICONS.aboutMe, 'explorer', <AboutMe />); break;
       case 'resume': openWindow('resume', 'My Resume', XP_ICONS.resume, 'system', <MyResume />, true, { initialWidth: 880, initialHeight: 700 }); break;
       case 'contact': openWindow('contact', 'Contact Me', XP_ICONS.contact, 'system', <ContactMe />, true); break;
