@@ -3,11 +3,10 @@ import React, { useState } from 'react';
 import { SkipBack, SkipForward, Shuffle } from 'lucide-react';
 
 const TRACKS = [
-  { title: 'Belageddu - Kirik Party', id: 'z3eFGSMCe-s' },
-  { title: 'Rangitaranga - Title Track', id: 'M8YEPaFb0yA' },
-  { title: 'Hrudayat Vaje Something', id: 'RNEYmHmFstQ' },
-  { title: 'Baarisu Kannada Dindimava', id: '3QzfCFINmMI' },
-  { title: 'Jai Ho - A.R. Rahman', id: 'AzlMeTxVdH8' },
+  { title: 'Bombe Helutaithe - Raajakumara', id: 'gy5_T2ACerk' },
+  { title: 'Jai Ho - A.R. Rahman', id: 'xwwAVRyNmgQ' },
+  { title: 'Rangitaranga - Title Track', id: 'oepLylgqSKU' },
+  { title: 'Dheera Dheera - KGF', id: 'IuS4LL_ALrU' },
 ];
 
 const MediaPlayer = () => {
