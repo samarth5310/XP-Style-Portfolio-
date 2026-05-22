@@ -6,6 +6,7 @@ import { X, Minus, Square, Copy, ArrowLeft, ArrowRight, Search, ChevronDown } fr
 import { XP_ICONS } from '@/constants';
 
 import { useIsMobile } from '@/hooks/useIsMobile';
+import { playSound } from '@/hooks/useSound';
 
 interface WindowProps {
   title: string;
@@ -72,7 +73,7 @@ const Window: React.FC<WindowProps> = ({
           <button onClick={(e) => { e.stopPropagation(); toggleMaximize(); }} className="w-[21px] h-[21px] bg-[#288eff] rounded-[3px] flex items-center justify-center border border-white/40 hover:bg-[#4a9eff] active:bg-[#196ebf]">
             {effectiveMaximized ? <Copy color="white" size={10} strokeWidth={3} /> : <Square color="white" size={10} strokeWidth={3} />}
           </button>
-          <button onClick={(e) => { e.stopPropagation(); onClose(); }} className="w-[21px] h-[21px] bg-[#e81123] rounded-[3px] flex items-center justify-center border border-white/40 hover:bg-[#f4606c] active:bg-[#bf0e1d]">
+          <button onClick={(e) => { e.stopPropagation(); playSound('close'); onClose(); }} className="w-[21px] h-[21px] bg-[#e81123] rounded-[3px] flex items-center justify-center border border-white/40 hover:bg-[#f4606c] active:bg-[#bf0e1d]">
             <X color="white" size={14} strokeWidth={3} />
           </button>
         </div>

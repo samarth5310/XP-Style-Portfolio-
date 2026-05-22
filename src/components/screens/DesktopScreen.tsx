@@ -1,6 +1,6 @@
 'use client';
-import React, { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ASSETS, XP_ICONS } from '@/constants';
 import Taskbar from '@/components/os/Taskbar';
 import DesktopIcon from '@/components/os/DesktopIcon';
@@ -8,6 +8,7 @@ import StartMenu from '@/components/os/StartMenu';
 import Window from '@/components/os/Window';
 import ShutdownModal from '@/components/screens/ShutdownModal';
 import { XPWindow } from '@/types';
+import { Info, X } from 'lucide-react';
 import MyProjects from '@/components/apps/MyProjects';
 import AboutMe from '@/components/apps/AboutMe';
 import MyResume from '@/components/apps/MyResume';
@@ -27,6 +28,13 @@ const DesktopScreen: React.FC<DesktopScreenProps> = ({ onRestart, onLogOut, isCr
   const [windows, setWindows] = useState<XPWindow[]>([]);
   const [nextZIndex, setNextZIndex] = useState(100);
   const [contextMenu, setContextMenu] = useState<{ x: number; y: number } | null>(null);
+  const [showWelcome, setShowWelcome] = useState(false);
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setShowWelcome(true), 1500);
+    const t2 = setTimeout(() => setShowWelcome(false), 9500);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, []);
 
   const openWindow = (id: string, title: string, icon: string, type: XPWindow['type'], content: React.ReactNode, hideToolbar = false, customProps: Partial<XPWindow> = {}) => {
     const existing = windows.find((w) => w.id === id);
@@ -139,6 +147,31 @@ const DesktopScreen: React.FC<DesktopScreenProps> = ({ onRestart, onLogOut, isCr
             ))}
           </AnimatePresence>
         </div>
+
+        {/* Welcome Balloon */}
+        <AnimatePresence>
+          {showWelcome && (
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className="absolute bottom-[40px] right-4 z-[500] max-w-xs bg-[#ffffe1] border border-black rounded-[6px] shadow-[2px_2px_5px_rgba(0,0,0,0.5)] overflow-hidden"
+            >
+              <div className="flex items-center justify-between bg-gradient-to-r from-[#3888e9] to-[#2262b8] px-2 py-1">
+                <span className="font-bold text-white text-xs">Welcome</span>
+                <button onClick={() => setShowWelcome(false)} className="text-white/80 hover:bg-white/20 rounded p-0.5"><X size={12} /></button>
+              </div>
+              <div className="p-3 flex gap-3">
+                <Info size={28} className="text-blue-600 shrink-0 mt-0.5" />
+                <div className="text-xs leading-relaxed text-gray-800">
+                  <p className="font-bold mb-1">Welcome to Samarth&apos;s XP!</p>
+                  <p>Click around to explore. Open apps from the desktop icons or Start menu.</p>
+                </div>
+              </div>
+              <div className="absolute -bottom-[6px] right-8 w-3 h-3 bg-[#ffffe1] border-r border-b border-black rotate-45" />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Start Menu */}
         <AnimatePresence>

@@ -17,7 +17,8 @@ const ContactMe = () => {
 
   const handleSend = () => {
     if (!message.trim()) return;
-    window.open(`mailto:${TEXT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`);
+    const body = fromEmail ? `From: ${fromEmail}\n\n${message}` : message;
+    window.location.href = `mailto:${TEXT.email}?subject=${encodeURIComponent(subject || 'Hello from Portfolio')}&body=${encodeURIComponent(body)}`;
   };
 
   return (

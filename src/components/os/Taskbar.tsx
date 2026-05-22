@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { StartLogo } from '@/components/XPIcons';
 import { XPWindow } from '@/types';
 import { Monitor, Minimize, Tv } from 'lucide-react';
+import { playSound } from '@/hooks/useSound';
 
 interface TaskbarProps {
   onToggleStart: () => void;
@@ -45,7 +46,7 @@ const Taskbar: React.FC<TaskbarProps> = ({ onToggleStart, isStartOpen, openWindo
       {/* Start Button */}
       <div className="h-full pl-0.5 py-0.5 shrink-0">
         <button
-          onClick={onToggleStart}
+          onClick={() => { playSound('click'); onToggleStart(); }}
           className="h-full px-3 sm:pr-6 sm:pl-2 rounded-[0px_12px_12px_0px] flex items-center gap-2 text-white font-bold italic shadow-lg transition-all hover:brightness-110 group"
           style={{
             background: isStartOpen
@@ -97,7 +98,7 @@ const Taskbar: React.FC<TaskbarProps> = ({ onToggleStart, isStartOpen, openWindo
         <button onClick={handleFullScreen} className="w-5 h-5 flex items-center justify-center rounded-[2px] hover:bg-[#1941a5]/50" title="Toggle Fullscreen">
           {isFullscreen ? <Minimize size={14} className="text-white" /> : <Monitor size={14} className="text-white" />}
         </button>
-        <span className="drop-shadow-md whitespace-nowrap cursor-default">{time}</span>
+        <span className="drop-shadow-md whitespace-nowrap cursor-default" title={new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}>{time}</span>
       </div>
     </div>
   );

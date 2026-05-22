@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useRef, useEffect } from 'react';
 import { TEXT } from '@/constants';
+import { playSound } from '@/hooks/useSound';
 
 const commands: Record<string, string> = {
   help: 'Available commands: help, about, skills, projects, contact, education, certs, clear, date, whoami',
@@ -29,6 +30,7 @@ const Terminal = () => {
     if (cmd === 'clear') { setHistory([]); }
     else {
       const output = commands[cmd] || `'${input}' is not recognized as an internal or external command.`;
+      if (!commands[cmd]) playSound('error');
       setHistory((h) => [...h, { cmd: input, output }]);
     }
     setInput('');
