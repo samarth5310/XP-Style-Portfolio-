@@ -57,6 +57,7 @@ export const PROJECTS = [
     description: 'A responsive web app that lets users compare the same dish across multiple restaurants by price, rating, and availability with advanced search and filtering.',
     tech: ['React', 'TypeScript', 'Tailwind CSS', 'Supabase', 'PostgreSQL'],
     github: 'https://github.com/samarth5310/Dishlyst-Food-Comparison-App',
+    live: 'https://dishlystx.netlify.app/',
     color: 'bg-[#1e4fb8]',
   },
   {
